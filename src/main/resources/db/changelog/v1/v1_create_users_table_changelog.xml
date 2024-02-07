@@ -1,0 +1,32 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="v1-1" author="root">
+        <preConditions>
+            <not>
+                <tableExists tableName="users"></tableExists>
+            </not>
+        </preConditions>
+        <createTable tableName="users">            
+            <column name ="id" type="bigint">
+                <constraints primaryKey="true"></constraints>
+            </column>
+            <column name="name" type="varchar(20)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name = "salary" type="bigint">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="v1-2" author="root">
+        <preConditions onFail="MARK_RAN">
+            <tableIsEmpty tableName="users"></tableIsEmpty>
+        </preConditions>
+        <loadData tableName="users"  file="db/data/user_data.csv"></loadData>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: v2_create_email_table_changelog.yaml
+      relativeToChangelogFile: true
+

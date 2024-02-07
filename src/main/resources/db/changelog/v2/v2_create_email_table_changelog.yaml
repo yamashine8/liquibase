@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: v2-1
+      author: root
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: email
+
+      changes:
+        - createTable:
+            tableName: email
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    autoIncrement: true
+              - column:
+                  name: email
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: user_email_fk
+                    referencedTableName: users
+                    referencedColumnName: id
